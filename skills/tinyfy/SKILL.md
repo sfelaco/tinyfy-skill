@@ -6,7 +6,10 @@ description: Use this skill to compress or resize images using the tinyfy CLI to
 # tinyfy — Image Compression & Resize CLI
 
 tinyfy wraps the TinyPNG API to compress and resize images from the command line.  
-The CLI code lives inside this skill folder. All paths below are relative to the project root `C:\Users\santo\Code\agenth24`.
+The CLI code lives inside this skill folder.
+
+*** IMPORTANT ***
+Follow the installation step before using the skill.
 
 ---
 
