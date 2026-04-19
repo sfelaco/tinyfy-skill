@@ -1,85 +1,29 @@
-# tinyfy-skill
+# Skills Collection
 
-A Claude Code skill that wraps the [TinyPNG API](https://tinypng.com/developers) to compress and resize images from the command line.
+A collection of useful skills for AI coding assistants. Each skill is designed to extend the capabilities of the assistant, providing specialized tools for various tasks.
 
-## What it does
+## Available Skills
 
-The `tinyfy` skill lets Claude compress or resize images on your behalf. When you ask Claude to compress, optimize, or resize an image, it uses this skill to invoke the TinyPNG API automatically.
+- **[tinyfy](skills/tinyfy/SKILL.md)**: A skill for compressing and resizing images using the TinyPNG API. It includes a Python CLI wrapper and handles automatic optimization within the assistant's workflow.
+- **[telegram-send](skills/telegram-send/SKILL.md)**: A skill to send text messages and files to a Telegram chat directly via the HTTP Bot API using `curl`. It works without external dependencies or persistent connections.
 
-## Project structure
+## Installation
 
-```
-skills/
-└── tinyfy/
-    ├── SKILL.md          # Skill definition (triggers + instructions for Claude)
-    ├── cli.py            # Python CLI wrapping the TinyPNG API
-    ├── requirements.txt  # Python dependencies
-    ├── .env.example      # API key template
-    └── .env              # Your API key (git-ignored)
-```
-
-## Setup
-
-**1. Install dependencies:**
+You can install skills from this collection using the following command:
 
 ```bash
-pip install -r skills/tinyfy/requirements.txt
+npx skills add https://github.com/sfelaco/skills-collection --skill <skill-name>
 ```
 
-**2. Set your TinyPNG API key:**
+Replace `<skill-name>` with the name of the skill you want to install (e.g., `tinyfy` or `telegram-send`).
 
-```bash
-cp skills/tinyfy/.env.example skills/tinyfy/.env
-# Edit .env and fill in your TINIFY_API_KEY
-```
+## How to use
 
-Get a free API key at [tinypng.com/developers](https://tinypng.com/developers) (500 compressions/month free).
+After installation, the skill is added to your local assistant configuration. Each skill folder contains a `SKILL.md` file with specific documentation, requirements, and configuration instructions.
 
-## Usage
+## Contributing
 
-Once installed in a Claude Code project, just ask Claude naturally:
-
-- "Compress `photo.png`"
-- "Resize `banner.jpg` to 800px wide"
-- "Resize the long side of `image.png` to 1200px"
-
-Claude will invoke the CLI and report before/after file sizes with the percentage saved.
-
-### Direct CLI usage
-
-You can also call the CLI directly:
-
-**Compress:**
-```bash
-python skills/tinyfy/cli.py compress <input> [-o <output>]
-```
-
-**Resize by width or height (preserves aspect ratio):**
-```bash
-python skills/tinyfy/cli.py resize <input> --width <px> [-o <output>]
-python skills/tinyfy/cli.py resize <input> --height <px> [-o <output>]
-```
-
-**Pass API key inline:**
-```bash
-python skills/tinyfy/cli.py --api-key <KEY> compress photo.png
-```
-
-### Output defaults
-
-| Command    | Default output filename      |
-|------------|------------------------------|
-| `compress` | `<name>_optimized.<ext>`     |
-| `resize`   | `<name>_resized.<ext>`       |
-
-## Dependencies
-
-| Package        | Purpose                                      |
-|----------------|----------------------------------------------|
-| `tinify`       | TinyPNG API client                           |
-| `python-dotenv`| Loads `TINIFY_API_KEY` from `.env`           |
-| `Pillow`       | Reads image dimensions for long-side resize  |
-| `pytest`       | Test runner                                  |
+Feel free to suggest new skills or improvements to existing ones by opening an issue or a pull request.
 
 ## License
 
